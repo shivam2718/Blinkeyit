@@ -40,10 +40,11 @@ const Header = () => {
   }
   useEffect(() => {
   const qty = cartItem.reduce((prev, curr) => prev + curr.quantity, 0);
-  const price = cartItem.reduce(
-    (prev, curr) => prev + curr.quantity * curr.price,
-    0
-  );
+  const price = cartItem.reduce((prev, curr) => {
+  const actualPrice = curr.price - (curr.price * (curr.discount || 0)) / 100;
+  return prev + curr.quantity * actualPrice;
+}, 0);
+
 
   setTotalQty(qty);
   setTotalPrice(price);
@@ -119,16 +120,22 @@ const Header = () => {
                 <div className="animate-bounce">
                   <GiShoppingCart size={36} />
                 </div>
-                {
-                  console.log("Cart:", cartItem)&&
-                  cartItem.length > 0 ? (<div>
-                    <p>{totalQty} items</p>
-                    <p className="flex items-center">
-  <MdOutlineCurrencyRupee className="inline" />{totalPrice}
-</p></div>) : ( <div className="font-semibold">
-                  <p>My Cart</p>
-                </div>)
-                }
+                <div className="font-semibold">
+                  {
+                    cartItem[0]?(
+                      <div>
+                        <p className="text-sm">{totalQty} items</p>
+                        <p className="text-sm flex items-center gap-1">
+                          <MdOutlineCurrencyRupee />
+                          {totalPrice}.00
+                        </p>
+                        </div>
+                    ):(
+                    <p>My Cart</p>
+                    )
+                  }
+                 
+                </div>
                
               </button>
             </div>

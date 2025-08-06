@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Footers from './components/Footers'
+import GlobalProvider from './provider/GlobalProvider'
 import toast, { Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
 import fetchUserDetails from './utils/fetchUserDetails';
@@ -59,34 +60,22 @@ function App() {
     finally{
       }
   } 
-const fetchCartitem = async() => {
-  try {
-    const response = await Axios({
-      ...SummaryApi.getCartItem
-    })
-    const {data: responseData} = response
-    if(responseData.success) {
-      dispatch(setCartItems(responseData.data)); // Dispatch to Redux
-    }
-  } catch(error) {
-    console.log(error) 
-  }
-}
+
    useEffect(()=>{
       fetchCategory()
     fetchUser()
     fetchSubCategory()
-    fetchCartitem()
+    //fetchCartitem()
    },[])
   return (
-  <>
+  <GlobalProvider>
   <Header/>
    <main className='min-h-[78vh]'>
     <Outlet/>
    </main>
    <Footers/>
    <Toaster/>
-   </>
+   </GlobalProvider>
   )
 }
 export default App

@@ -3,24 +3,29 @@ import { Link } from "react-router-dom";
 import toast from 'react-hot-toast';
 import { priceWithDiscount } from "../utils/priceWithDiscount";
 import SummaryApi from "../common/SummaryApi";
+import { useGlobalContext } from "../provider/GlobalProvider";
 import AxiosToastError from '../utils/AxiosToastError.js'
 import {useState} from "react"
 import Axios from '../utils/axios.js'
+import { useDispatch } from 'react-redux';
+import { handleAddItemCart } from '../store/cartProduct';
+
 const CardProduct = ({ data }) => {
+  const dispatch = useDispatch();
   const url = `/product/${data.name
     .replaceAll(" ", "-")
     .replaceAll(",", "-")
     .replaceAll("&", "-")}-${data._id}`;
     const [loading,setLoading]=useState(false)
- 
+ const {fetchCartitem,updateCartItemQty}=useGlobalContext()
+
+
 
 const handleADDTocart = async(e) => {
   e.preventDefault()
   e.stopPropagation()
 
   try {
-    dispatch(addToCartStart());
-    
     const response = await Axios({
       ...SummaryApi.addToCart,
       data: {
@@ -28,18 +33,23 @@ const handleADDTocart = async(e) => {
       }
     });
     
-    const responseData = response.data;
-    
-    if(responseData.success) {
-      dispatch(addToCartSuccess(responseData.data));
-      toast.success(responseData.message);
-    } else {
-      toast.error(responseData.message || "Failed to add to cart");
+    if(response.data.success) {
+      // Dispatch to Redux
+      dispatch(handleAddItemCart({
+        ...data,
+        quantity: 1
+      }));
+      toast.success(response.data.message);
     }
-  } catch (error) {
-    dispatch(addToCartFailure(error.message));
+  } catch(error) {
     AxiosToastError(error);
   }
+}
+
+const increaseQty = async (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  
 }
   return (
     <Link

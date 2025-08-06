@@ -66,3 +66,32 @@ export const getCartItemController = async (request, response) => {
       error: true
     })
   }}
+export const updateCartItemQtyController = async (request, response) => {
+
+try {
+    const userId = request.userId
+    const {_id}=request.body
+    if(!_id||!qty){
+        return response.status(400).json({
+            message: "Product ID is required",
+            success: false,
+            error: true
+        })
+    }
+const updateCartitem=await CartProductModel.updateOne({_id:_id},
+    {
+        quantity:qty
+    })
+    return response.json({
+        data:updateCartitem,
+        message: "Cart item updated successfully",
+        success: true,
+        error: false
+    })
+} catch (error) {
+    return response.status(500).json({
+        message: "Internal server error",
+        success: false,
+        error: true
+    })
+}}
