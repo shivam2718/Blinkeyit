@@ -13,6 +13,7 @@ import { MdOutlineCurrencyRupee } from "react-icons/md";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { handleAddItemCart } from "../store/cartProduct";
+import DisplayCartItem from "./DisplayCartItem";
 const Header = () => {
   const [isMobile] = useMobile();
   const location = useLocation();
@@ -24,7 +25,9 @@ const Header = () => {
   const cartItem=useSelector(state=>state.cartItem.cart)
   const [totalQty, setTotalQty] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-  console.log("cartItem",cartItem)
+  const [notDiscountPrice,setNotDiscountPrice] = useState(0);
+  const [openCartSection,setOpenCartSection] = useState(false);
+//  console.log("cartItem",cartItem)
   const redirectToLoginPage = () => {
     navigate("/login");
   };
@@ -40,14 +43,21 @@ const Header = () => {
   }
   useEffect(() => {
   const qty = cartItem.reduce((prev, curr) => prev + curr.quantity, 0);
-  const price = cartItem.reduce((prev, curr) => {
-  const actualPrice = curr.price - (curr.price * (curr.discount || 0)) / 100;
-  return prev + curr.quantity * actualPrice;
-}, 0);
 
+  const price = cartItem.reduce((prev, curr) => {
+    const actualPrice =
+      curr.productId.price -
+      (curr.productId.price * (curr.productId.discount || 0)) / 100;
+      
+    return prev + curr.quantity * actualPrice;
+  }, 0);
 
   setTotalQty(qty);
   setTotalPrice(price);
+  const notDiscountPrice = cartItem.reduce((prev,curr) => {
+    return prev + curr.quantity * curr.productId.price;
+  }, 0);
+  setNotDiscountPrice(notDiscountPrice);
 }, [cartItem]);
 
   return (
@@ -81,7 +91,7 @@ const Header = () => {
           {/*login and my cart */}
           <div>
             {/*user icon is only displayed in mobile version */}
-            <button className=" lg:hidden" onClick={handleMobileUser}>
+            <button className=" lg:hidden" >
               <FaRegCircleUser size={26} />
             </button>
 
@@ -92,7 +102,7 @@ const Header = () => {
                 <div className="relative">
                   <div
                     className="flex items-center gap-1 cursor-pointer select-none "
-                    onClick={() => setOpenUserMenu((prev) => !prev)}
+                    onClick={() => setOpenUserMenu(true)}
                   >
                     <p>Account</p>
                     {openUserMenu ? (
@@ -115,7 +125,9 @@ const Header = () => {
                 </button>
               )}
 
-              <button className="flex items-center gap-2  bg-green-800 hover:bg-green-700 px-3 py-3 rounded text-white">
+              <button className="flex items-center gap-2  bg-green-800 hover:bg-green-700 px-3 py-3 rounded text-white"
+               onClick={()=>setOpenCartSection((prev)=>!prev)}
+              >
                 {/* add to cart icon */}
                 <div className="animate-bounce">
                   <GiShoppingCart size={36} />
@@ -146,6 +158,12 @@ const Header = () => {
       <div className="lg:hidden container mx-auto flex items-center px-2 justify-between">
         <Search />
       </div>
+      <div>
+       { openCartSection&&(
+<DisplayCartItem close={()=>setOpenCartSection(false)}/>
+        )
+}
+</div>
     </header>
   );
 };
