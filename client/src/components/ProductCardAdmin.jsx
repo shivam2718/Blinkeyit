@@ -3,7 +3,7 @@ import EditProductAdmin from './EditProductAdmin'
 
 import { IoClose } from 'react-icons/io5'
 import SummaryApi from '../common/SummaryApi'
-import Axios from '../utils/axios'
+import Axios from '../utils/Axios'
 import AxiosToastError from '../utils/AxiosToastError'
 import toast from 'react-hot-toast'
 

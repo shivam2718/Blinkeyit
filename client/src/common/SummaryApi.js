@@ -1,5 +1,3 @@
-import { getProductByCategory, searchProduct, updateProductDetails } from "../../../server/controllers/product.controller";
-
 /*export const baseURL="http://localhost:8080"
 const SummaryApi={
     register:{
@@ -150,6 +148,10 @@ const SummaryApi = {
     updateCartItemQty:{
         url:'/api/cart/update-qty',
         method:'put'
-    }
+    },
+    deleteCartItem : {
+        url : '/api/cart/delete-cart-item',
+        method : 'delete'
+    },
 };
 export default SummaryApi;

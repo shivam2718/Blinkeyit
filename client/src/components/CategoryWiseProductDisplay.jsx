@@ -1,118 +1,113 @@
-import { Link,useNavigate } from 'react-router-dom'
-import { FaAngleLeft ,FaAngleRight} from "react-icons/fa";
-import React, { useEffect, useState } from 'react';
-import { useRef } from 'react';
-import {useSelector} from 'react-redux'
-import SummaryApi from '../common/SummaryApi';
-import CardProduct from './CardProduct.jsx';
-import Axios from '../utils/axios.js';
-import AxiosToastError from '../utils/AxiosToastError.js';
-import CardLoading from './CardLoading.jsx';
-const CategoryWiseProductDisplay = ({id,name}) => {
-    const [data ,setData] = useState([]);
-    const [loading, setLoading] = useState(false);
-     const navigate = useNavigate()
-  const subCategoryData = useSelector(state => state.product.allSubCategory)
-   const loadingCardNumber=new Array(7).fill(null)
+import React, { useEffect, useRef, useState } from 'react'
+import { Link, } from 'react-router-dom'
+import AxiosToastError from '../utils/AxiosToastError'
+import Axios from '../utils/Axios'
+import SummaryApi from '../common/SummaryApi'
+import CardLoading from './CardLoading'
+import CardProduct from './CardProduct'
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import { useSelector } from 'react-redux'
+import { valideURLConvert } from '../utils/valideURLConvert'
+
+const CategoryWiseProductDisplay = ({ id, name }) => {
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
+    const containerRef = useRef()
+    const subCategoryData = useSelector(state => state.product.allSubCategory)
+    const loadingCardNumber = new Array(6).fill(null)
+
     const fetchCategoryWiseProduct = async () => {
         try {
-            setLoading(true);
-            const response =await Axios({
-           ...SummaryApi.getProductByCategory,
+            setLoading(true)
+            const response = await Axios({
+                ...SummaryApi.getProductByCategory,
                 data: {
-                    
-                    id:[id]
-                
+                    id: id
                 }
             })
-            const {data:responseData}=response
-           // console.log(responseData)
-            if(responseData.success){
+
+            const { data: responseData } = response
+
+            if (responseData.success) {
                 setData(responseData.data)
             }
         } catch (error) {
-            console.error("Error fetching category wise product:", error);
-            AxiosToastError(error);
+            AxiosToastError(error)
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
     }
-    const containerRef =useRef()
+
     useEffect(() => {
-        fetchCategoryWiseProduct();
-    }, []);
-   const handleScrollRight = () => {
-  if (containerRef.current) {
-    containerRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+        fetchCategoryWiseProduct()
+    }, [])
+
+    const handleScrollRight = () => {
+        containerRef.current.scrollLeft += 200
+    }
+
+    const handleScrollLeft = () => {
+        containerRef.current.scrollLeft -= 200
+    }
+
+    
+
+  
+
+  const handleRedirectProductListpage = ()=>{
+      const subcategory = subCategoryData.find(sub =>{
+        const filterData = sub.category.some(c => {
+          return c._id == id
+        })
+
+        return filterData ? true : null
+      })
+      const url = `/${valideURLConvert(name)}-${id}/${valideURLConvert(subcategory?.name)}-${subcategory?._id}`
+
+      return url
   }
-}
-const handleScrollLeft = () => {
-  if (containerRef.current) {
-    containerRef.current.scrollBy({ left: -400, behavior: 'smooth' });
-  }
-};
 
- const handleRedirectProductListPage = () => {
-  console.log(id,name)
-  const subcategory=subCategoryData.find(sub=>{
-const filterData=sub.category.some(c=>{
-return c._id===id
-}) 
- return filterData?true:null
-})
-const url =`/${name.replaceAll(" ","-").replaceAll(",","-").replaceAll("&","-")}-${id}/${subcategory.name.replaceAll(" ","-").replaceAll(",","-").replaceAll("&","-")}-${subcategory._id}`
-navigate(url)
+  const redirectURL =  handleRedirectProductListpage()
+    return (
+        <div>
+            <div className='container mx-auto p-4 flex items-center justify-between gap-4'>
+                <h3 className='font-semibold text-lg md:text-xl'>{name}</h3>
+                <Link  to={redirectURL} className='text-green-600 hover:text-green-400'>See All</Link>
+            </div>
+            <div className='relative flex items-center '>
+                <div className=' flex gap-4 md:gap-6 lg:gap-8 container mx-auto px-4 overflow-x-scroll scrollbar-none scroll-smooth' ref={containerRef}>
+                    {loading &&
+                        loadingCardNumber.map((_, index) => {
+                            return (
+                                <CardLoading key={"CategorywiseProductDisplay123" + index} />
+                            )
+                        })
+                    }
 
-}
-return (
-    <div>
-        <div className='container mx-auto my-4 px-4 py-2 flex items-center justify-between gap-4'>
-            <h3 className='font-semibold text-lg md:text-xl'>{name}</h3>
-            <Link 
-            onClick={handleRedirectProductListPage}
-            to=""
-                className="text-green-600 hover:text-green-700 font-semibold"
-            >See All</Link>
-        </div>
-        <div
-  className="flex gap-4 items-center lg:gap-8 md:gap-6  mx-auto overflow-x-auto scrollbar-hide "
-  ref={containerRef}
->
 
-            {
-                loading && loadingCardNumber.map((loading, index) => (
-                    <CardLoading key={"123" + "categoryWiseProductDisplay" + index} />
-                ))
-            }
-           <div className="w-full left-0 right-0 container mx-auto gap-6 flex justify-between 
-           ">
+                    {
+                        data.map((p, index) => {
+                            return (
+                                <CardProduct
+                                    data={p}
+                                    key={p._id + "CategorywiseProductDisplay" + index}
+                                />
+                            )
+                        })
+                    }
 
-          
-            {
-                data.map((p, index) => (
-                    <CardProduct
-                        data={p}
-                        key={p._id + "categoryWiseProductDisplay" + index} />
-                ))
-            }
-             </div>
-            <div className="w-full left-0 right-0 container mx-auto absolute hidden lg:flex justify-between 
-           ">
-<button
-onClick={handleScrollLeft}
-className="z-10 relative bg-white shadow-lg p-2 rounded-full text-lg hover:bg-gray-100" >
-    <FaAngleLeft />
-</button>
-<button 
-onClick={handleScrollRight}
-className="z-10 relative text-lg bg-white shadow-lg p-2 rounded-full hover:bg-gray-100" >
-    <FaAngleRight />
-</button>
+                </div>
+                <div className='w-full left-0 right-0 container mx-auto  px-2  absolute hidden lg:flex justify-between'>
+                    <button onClick={handleScrollLeft} className='z-10 relative bg-white hover:bg-gray-100 shadow-lg text-lg p-2 rounded-full'>
+                        <FaAngleLeft />
+                    </button>
+                    <button onClick={handleScrollRight} className='z-10 relative  bg-white hover:bg-gray-100 shadow-lg p-2 text-lg rounded-full'>
+                        <FaAngleRight />
+                    </button>
+                </div>
             </div>
         </div>
-       
-    </div>
-);
-};
+    )
+}
 
-export default CategoryWiseProductDisplay;
+export default CategoryWiseProductDisplay

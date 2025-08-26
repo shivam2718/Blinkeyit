@@ -3,7 +3,7 @@ import React from 'react'
 import uploadImage from '../utils/uploadImage';
 import { MdCloseFullscreen } from "react-icons/md";
 import { useState } from 'react'
-import Axios from '../utils/axios'; // This already has baseURL configured
+import Axios from '../utils/Axios'; // This already has baseURL configured
 import AxiosToastError from '../utils/AxiosToastError';
 import toast from 'react-hot-toast'; 
 import SummaryApi, { baseURL } from '../common/SummaryApi'; // Import baseURL

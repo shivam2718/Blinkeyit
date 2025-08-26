@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "blinkeyit",
+			"path": "../../.."
+		},
+		{
+			"name": "models",
+			"path": "../../../../models"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "blinkeyit"
+	}
+}

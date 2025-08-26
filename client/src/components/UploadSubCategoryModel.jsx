@@ -4,7 +4,7 @@ import { IoIosClose } from "react-icons/io";
 import uploadImage from '../utils/uploadImage'
 import { useSelector } from "react-redux";
 import SummaryApi from "../common/SummaryApi";
-import Axios from "../utils/axios";
+import Axios from "../utils/Axios";
 import toast from "react-hot-toast"; 
 import AxiosToastError from "../utils/AxiosToastError";
 const UploadSubCategoryModel=({close,fetchData })=>{

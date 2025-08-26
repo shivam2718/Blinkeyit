@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlinePermIdentity } from "react-icons/md";
 import { setUserDetails } from '../store/userSlice';
 import UserProfileAvatarEdit from "../components/UserProfileAvatarEdit";
-import Axios from '../utils/axios';
+import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
 import toast from 'react-hot-toast';

@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import toast from 'react-hot-toast';
-import Axios from '../utils/axios';
-import SummaryApi from '../common/summaryApi';
+import Axios from '../utils/Axios';
+import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
 import { useNavigate, Link } from 'react-router-dom'
 const ForgotPassword = () => {

@@ -11,7 +11,7 @@
   import Loading from '../components/Loading';
   import ViewImage from '../components/ViewImage'
   import SummaryApi from '../common/SummaryApi';
-  import Axios from '../utils/axios';
+  import Axios from '../utils/Axios.js';
   import AxiosToastError from '../utils/AxiosToastError.js'
   import successAlert from '../utils/SuccessAlert.js';
   const EditProductAdmin = ({  data:propsData,close,fetchProductData }) => {

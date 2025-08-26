@@ -4,7 +4,7 @@ import { MdCloseFullscreen } from "react-icons/md";
 import AxiosToastError from '../utils/AxiosToastError'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import Axios from '../utils/axios'
+import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi';
 import {updateAvatar} from '../store/userSlice'
 const UserProfileAvatarEdit = ({close}) => {

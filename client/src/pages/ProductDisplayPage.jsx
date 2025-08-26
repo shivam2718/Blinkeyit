@@ -3,14 +3,15 @@ import SummaryApi from '../common/SummaryApi'
 import AxiosToastError from '../utils/AxiosToastError'
 import { useEffect, useState, useRef} from 'react'
 import { PiCurrencyInrBold } from "react-icons/pi";
-import Axios from '../utils/axios'
+import Axios from '../utils/Axios.js'
 import Divider from '../components/Divider'
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import image1 from '../assets/minute_delivery.png' 
 import image2 from '../assets/Best_Prices_Offers.png'
 import image3 from '../assets/Wide_Assortments.webp'
-import { priceWithDiscount } from '../utils/priceWithDiscount'
+import AddToCartButton from '../components/AddToCartButton.jsx'
+import { pricewithDiscount } from '../utils/priceWithDiscount.js'
 const ProductDisplayPage = () => {
     const params = useParams()
     const productId=params.product?.split("-").slice(-1)[0]
@@ -144,7 +145,7 @@ console.log("product data", data)
 
   <p className='flex items-center gap-1 font-semibold text-lg border border-green-500 w-fit text-white rounded px-2 py-1 bg-green-400'>
     <PiCurrencyInrBold />
-    {priceWithDiscount(data.price, data.discount) + ".00"}
+    {pricewithDiscount(data.price, data.discount) + ".00"}
   </p>
 </div>
 
@@ -154,9 +155,9 @@ console.log("product data", data)
   data.stock===0 ? (
     <p className='text-lg text-red-500'>Out of Stock</p>
   ):(
-<button className='my-4 px-4 py-1 bg-green-600 hover:bg-green-700 rounded'>
-    Add  
-</button>
+<div   className='my-4 px-4 py-1'>
+   <AddToCartButton data={data} />  
+</div>
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react';
-import Axios from '../utils/axios'
+import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
 import {Link} from "react-router-dom"
 import AxiosToastError from '../utils/AxiosToastError'

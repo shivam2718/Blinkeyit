@@ -5,7 +5,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import toast from 'react-hot-toast';
 import { FaEye } from "react-icons/fa";
 import { Link } from 'react-router-dom'
-import Axios from '../utils/axios';
+import Axios from '../utils/Axios';
 import AxiosToastError from '../utils/AxiosToastError';
 
 const ResetPassword = () => {

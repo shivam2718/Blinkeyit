@@ -3,7 +3,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 
-const Footers = () => {
+const Footer = () => {
   return (
     <div>
       <footer className='border-t '>
@@ -27,4 +27,4 @@ const Footers = () => {
   )
 }
 
-export default Footers
+export default Footer

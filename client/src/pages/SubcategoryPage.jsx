@@ -3,11 +3,11 @@ import { MdModeEdit } from "react-icons/md";
 
 import { MdDelete } from "react-icons/md";
 
-import ConfirmBox from '../components/ConfirmBox';
+import ConfirmBox from '../components/confirmBox';
 import { useState } from 'react'
 import UploadSubCategoryModel from '../components/UploadSubCategoryModel'
 import AxiosToastError from '../utils/AxiosToastError'
-import Axios from '../utils/axios'
+import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
 import { useEffect } from 'react'
 import DisplayTable from '../components/DisplayTable'
