@@ -27,7 +27,9 @@ const CheckoutPage = () => {
     
     {
       return (
-        <label htmlFor={`address-${index}`}>
+        <label htmlFor={`address-${index}`}
+        className={`${address.status ? '' : 'hidden'}`}
+        >
 
    
    <div key={index } onChange={(e)=>{

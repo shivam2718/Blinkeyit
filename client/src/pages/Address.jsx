@@ -3,13 +3,36 @@ import {useSelector} from 'react-redux'
 import AddAddress from '../components/AddAddress'
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
-
+import { toast } from 'react-hot-toast';
+import AxiosToastError from '../utils/AxiosToastError'
+import Axios from '../utils/Axios';
+import SummaryApi from '../common/SummaryApi'
+import EditAddress from '../pages/EditAddress'
+import {useGlobalContext} from '../provider/GlobalProvider'
 const Address = () => {
 
   const addressList = useSelector(state=>state.addresses.addressList)
   const [openAddress,setOpenAddress]=React.useState(false)
   const [openEdit,setOpenEdit]=React.useState(false)
   const [editData,setEditData]=React.useState({})
+  const {fetchAddress} = useGlobalContext()
+  const handleDisableAddress = async (id) => {
+    try {
+      const response = await Axios({
+        ...SummaryApi.deleteAddress,
+        data: {
+          _id: id
+        }
+      })
+      const { data: responseData } = response
+      if (responseData.success) {
+        toast.success(responseData.message)
+        fetchAddress()
+      }
+    } catch (error) {
+      AxiosToastError(error)
+    }
+  }
   return (
     <div className='bg-green-50'>
    <div className='flex bg-white shadow  px-2 py-2 text-lg font-semibold mb-2 justify-between '>   
@@ -30,12 +53,9 @@ const Address = () => {
        
 
    
-   <div key={index } onChange={(e)=>{
-       setSelectAddress(e.target.value)
-   }} className=' p-4 mb-2 rounded flex flex-center gap-4 hover:border-1 hover:border-purple-400 hover:text-purple-600 bg-white mt-4 border-t-1 border-l-1 '>
-    <div>
-
-      </div>
+   <div key={index } 
+   className={` p-4 mb-2 rounded flex flex-center gap-4 hover:border-1 hover:border-purple-400 hover:text-purple-600 bg-white mt-4 border-t-1 border-l-1  ${!address.status && 'hidden'}`}>
+    
       
       <div className='w-full'>
          <p>{address.address_line}</p>
@@ -47,10 +67,17 @@ const Address = () => {
            
             
            <button>
-           <MdDelete  size={30} className='text-red-500 cursor-pointer hover:text-red-700'/>
+           <MdDelete  size={30} 
+           onClick={() => handleDisableAddress(address._id)}
+           className='text-red-500 cursor-pointer hover:text-red-700'/>
            </button>
             <button>
-           <MdEdit  size={30} className='text-blue-500 cursor-pointer hover:text-blue-700'/></button>
+           <MdEdit  size={30} className='text-blue-500 cursor-pointer hover:text-blue-700'
+           onClick={()=>{
+               setOpenEdit(true)
+               setEditData(address)
+           }}
+           /></button>
         </div>
         </div>
    
@@ -62,6 +89,11 @@ const Address = () => {
   )
 }
 
+{
+  openEdit && (
+    <EditAddress close={() => setOpenEdit(false)} data={editData} />
+  )
+}
     </div>
   )
 }

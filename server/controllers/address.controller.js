@@ -59,3 +59,58 @@ export const getAddressController = async(request,response)=>{
         })
     }
 }
+
+
+export const updateAddressController = async(request,response)=>{
+    try {
+        const userId = request.userId // middleware auth 
+        const { _id, address_line,city,state,country,pincode, mobile } = request.body 
+
+        const updateAddress = await AddressModel.updateOne({ _id : _id, userId : userId },{
+            address_line,
+            city,
+            state,
+            country,
+            mobile,
+            pincode
+        })
+
+        return response.json({
+            message : "Address Updated",
+            error : false,
+            success : true,
+            data : updateAddress
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+}
+
+export const deleteAddresscontroller = async(request,response)=>{
+    try {
+        const userId = request.userId // auth middleware    
+        const { _id } = request.body 
+
+        const disableAddress = await AddressModel.updateOne({ _id : _id, userId},{
+            status : false
+        })
+
+        return response.json({
+            message : "Address remove",
+            error : false,
+            success : true,
+            data : disableAddress
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+}
+
