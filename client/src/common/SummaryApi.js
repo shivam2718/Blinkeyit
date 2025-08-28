@@ -1,32 +1,4 @@
-/*export const baseURL="http://localhost:8080"
-const SummaryApi={
-    register:{
-     url: '/api/user/register' ,
-     method:'POST' 
-    },
-    login:{
-        url:"/api/user/login",
-        method:"POST"
-    },
-    forgot_password:{
-        url:"/api/user/forgot-password",
-        method:"PUT"
-    },
-    forgot_password_otp_verification:{
-     url:"/api/user/verify-forgot-password-otp",
-     method:"put"
-    },
-    resetPassword:{
-        url:"/api/user/reset-password",
-        method:"PUT"
-    },
-    refreshToken:{
-        url:"api/user/refresh-token",
-        method:"POST"
-    }
-}
-export default SummaryApi;
-*/
+
 export const baseURL = import.meta.env.VITE_API_URL;
 const SummaryApi = {
     register: {
@@ -153,5 +125,13 @@ const SummaryApi = {
         url : '/api/cart/delete-cart-item',
         method : 'delete'
     },
+    createAddress:{
+        url:'/api/address/create',
+        method:'post'
+    },
+    getAddress:{
+        url:'/api/address/get',
+        method:'get'
+    }
 };
 export default SummaryApi;

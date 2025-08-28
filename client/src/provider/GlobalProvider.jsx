@@ -1,3 +1,4 @@
+
 import { createContext,useContext, useEffect, useState } from "react";
 import Axios from "../utils/Axios";
 import SummaryApi from "../common/SummaryApi";
@@ -7,6 +8,7 @@ import AxiosToastError from "../utils/AxiosToastError";
 import toast from "react-hot-toast";
 import { pricewithDiscount } from '../utils/priceWithDiscount.js'
 
+import { handleAddAddress } from "../store/addressSlice";
 export const GlobalContext = createContext(null)
 
 export const useGlobalContext = ()=> useContext(GlobalContext)
@@ -28,7 +30,7 @@ const GlobalProvider = ({children}) => {
     
           if(responseData.success){
             dispatch(handleAddItemCart(responseData.data))
-            console.log(responseData)
+           // console.log(responseData)
           }
     
         } catch (error) {
@@ -48,7 +50,7 @@ const GlobalProvider = ({children}) => {
           const { data : responseData } = response
 
           if(responseData.success){
-              // toast.success(responseData.message)
+               toast.success(responseData.message)
               fetchCartItem()
               return responseData
           }
@@ -101,20 +103,20 @@ const GlobalProvider = ({children}) => {
         dispatch(handleAddItemCart([]))
     }
 
-    const fetchAddress = async()=>{
-      try {
-        const response = await Axios({
-          ...SummaryApi.getAddress
-        })
-        const { data : responseData } = response
-
-        if(responseData.success){
-          dispatch(handleAddAddress(responseData.data))
-        }
-      } catch (error) {
-          // AxiosToastError(error)
-      }
+   const fetchAddress = async()=>{
+  try {
+    const response = await Axios({
+      ...SummaryApi.getAddress
+    })
+    const { data : responseData } = response
+    //console.log("addresschmfjxdgfkxlx" )
+    if(responseData.success){
+      dispatch(handleAddAddress(responseData.data))
     }
+  } catch (error) {
+      toast.error("Failed to fetch addresses")
+  }
+}
     const fetchOrder = async()=>{
       try {
         const response = await Axios({
@@ -134,7 +136,7 @@ const GlobalProvider = ({children}) => {
       fetchCartItem()
       handleLogoutOut()
       fetchAddress()
-      fetchOrder()
+     // fetchOrder()
     },[user])
     
     return(

@@ -3,15 +3,30 @@ import { IoClose } from "react-icons/io5";
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees'
 import { useGlobalContext } from '../provider/GlobalProvider';
 import { IoMdArrowRoundForward } from "react-icons/io";
+//import toast from '../'
 import { useSelector } from 'react-redux' 
 import AddToCartButton from './AddToCartButton';
 import { pricewithDiscount } from '../utils/priceWithDiscount.js'
-import emptyCart from '../assets/empty_cart.webp'   // ✅ import empty cart image
+import { useNavigate } from 'react-router-dom'
+
+import emptyCart from '../assets/empty_cart.webp'   
 
 const DisplayCartItem = ({ close }) => {
+  const  navigate = useNavigate();
   const { notDiscountTotalPrice, totalPrice, totalQty } = useGlobalContext()
   const cartItem = useSelector(state => state.cartItem.cart)
-
+  const user = useSelector(state => state.user)
+  console.log(user);
+  const redirectToCheckoutPage = () => {
+    if(user?._id){
+      navigate('/checkout');
+      if(close){
+        close();
+      }
+      return;
+    }
+    //toast.error("Please log in to proceed to checkout");
+  }
   return (
     <section className="bg-neutral-800/70 fixed inset-0 z-50">
       <div className="bg-white w-full max-w-sm min-h-screen max-h-screen ml-auto">
@@ -153,7 +168,8 @@ const DisplayCartItem = ({ close }) => {
           <div className='p-2'>
             <div className='bg-green-700 text-neutral-100 p-2 rounded flex items-center gap-4 justify-between py-4 px-4 font-bold '>
               <div>{DisplayPriceInRupees(totalPrice+40+5)}</div>
-              <button className='flex items-center gap-2'>
+              
+              <button className='flex items-center gap-2' onClick={redirectToCheckoutPage}>
                 Proceed
                 <span><IoMdArrowRoundForward size={20} /></span>
               </button>
