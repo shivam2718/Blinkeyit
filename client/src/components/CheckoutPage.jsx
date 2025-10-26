@@ -1,19 +1,81 @@
+
 import React from 'react'
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees'
 
 import { useState } from 'react'
 import { handleAddAddress } from '../store/addressSlice' // Add this import
 import { useSelector, useDispatch } from 'react-redux' // Add useDispatch
+import Axios from '../utils/Axios'
+import { toast } from 'react-hot-toast';
 import AddAddress from '../components/AddAddress'
 import { useGlobalContext } from '../provider/GlobalProvider';
+import {loadStripe} from '@stripe/stripe-js'
+import {useNavigate} from 'react-router-dom'
+import SummaryApi from '../common/SummaryApi'
 const CheckoutPage = () => {
   const dispatch = useDispatch() 
-    const { notDiscountTotalPrice, totalPrice, totalQty } = useGlobalContext()
+  const navigate=useNavigate()
+    const { notDiscountTotalPrice, totalPrice, totalQty,fetchCartItem } = useGlobalContext()
 
     const [openAddress,setOpenAddress] = React.useState(false)
    const addressList = useSelector(state => state.addresses.addressList)
    const [selectAddress,setSelectAddress] = React.useState(0)
-   console.log(addressList[selectAddress])
+   const cartItemsList=useSelector(state => state.cartItem.cart)
+
+   console.log(totalPrice+40+5)
+ const handleCashOnDelivery = async() => {
+      try {
+          const response = await Axios({
+            ...SummaryApi.CashOnDeliveryOrder,
+            data : {
+              list_items : cartItemsList,
+              addressId : addressList[selectAddress]?._id,
+              subTotalAmt : totalPrice,
+              totalAmt :  totalPrice+40+5,
+            }
+          })
+
+          const { data : responseData } = response
+
+          if(responseData?.success){
+              toast.success(responseData.message)
+              if(fetchCartItem){
+                fetchCartItem()
+              }
+              navigate('/success')
+            
+          }
+
+      } catch(error){
+         toast.error('Payment failed')
+    }
+   }
+
+   const handleOnlinePayment=async()=>{
+  try{
+    const stripePublicKey=import.meta.env.VITE_STRIPE_PUBLIC_KEY
+    const stripePromise=await loadStripe(stripePublicKey)
+  const response =await Axios({
+    ...SummaryApi.payment_url,
+     data : {
+              list_items : cartItemsList,
+              addressId : addressList[selectAddress]?._id,
+              subTotalAmt : totalPrice,
+              totalAmt :  totalPrice+40+5,
+            }
+  })
+  const { data : responseData } = response
+
+  if(responseData?.success){
+     stripePromise.redirectToCheckout({ sessionId: responseData.sessionId })
+      navigate('/success')
+
+  }
+
+  }catch(error){
+
+  }
+   }
   return (
    <section className='bg-white '>
     <div className='container mx-auto  p-4 flex w-full gap-5 justify-between lg:flex-row flex-col'>
@@ -113,10 +175,14 @@ const CheckoutPage = () => {
         
            </div>
        <div className='w-full max-w-sm flex flex-col gap-4 mt-4 mb-4'>
-          <button className='py-2 px-4 bg-green-500 text-white font-semibold hover:bg-green-700  border-2 rounded border-emerald-900'>
+          <button className='py-2 px-4 bg-green-500 text-white font-semibold hover:bg-green-700  border-2 rounded border-emerald-900'
+          onClick={handleOnlinePayment}
+          >
          Online Payment
          </button>
-         <button className='py-2 px-4 font-semibold hover:bg-green-700 hover:text-white border-2 rounded border-emerald-900 text-green-500'>
+         <button className='py-2 px-4 font-semibold hover:bg-green-700 hover:text-white border-2 rounded border-emerald-900 text-green-500'
+         onClick={handleCashOnDelivery}
+         >
           Cash on Delivery
          </button>
        </div>
@@ -136,3 +202,5 @@ const CheckoutPage = () => {
 }
 
 export default CheckoutPage
+
+

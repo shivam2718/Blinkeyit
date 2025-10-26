@@ -140,6 +140,15 @@ const SummaryApi = {
     deleteAddress:{
         url:'/api/address/delete',
         method:'delete'
+    },
+    CashOnDeliveryOrder:{
+        url:'/api/order/cash-on-delivery',
+        method:'post'
+    },
+    payment_url:{
+        method:'post',
+        url:'/api/order/checkout'
     }
 };
 export default SummaryApi;
+

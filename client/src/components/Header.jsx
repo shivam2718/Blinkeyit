@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Search from "./search";
-import logo from "../assets/logo.png";
+import logo from "../assets/image.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import useMobile from "../hooks/useMobile";

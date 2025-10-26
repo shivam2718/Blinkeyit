@@ -18,6 +18,7 @@ import UploadProducts from '../pages/UploadProductsPage'
 import Category from '../pages/CategoryPage'
 import AdminPermission from "../layout/AdminPermission";
 import ProductListPage from "../pages/ProductListPage";
+import Success from '../pages/Success'
 import ProductDisplayPage from "../pages/ProductDisplayPage";
 import CheckoutPage from '../components/CheckoutPage'
 import CartMobile from '../pages/CartMobile'
@@ -107,6 +108,9 @@ const router = createBrowserRouter([
         },{
             path:"checkout",
             element:<CheckoutPage/>
+        },{
+            path:"success",
+            element:<Success/>
         }
 
         ]

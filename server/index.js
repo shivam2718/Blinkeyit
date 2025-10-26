@@ -24,6 +24,7 @@ import connectDB from './config/connectDB.js';
 
 import userRouter from './routes/user.route.js';
 import categoryRouter from './routes/category.route.js';
+import OrderRouter from './routes/order.route.js';
 import addressRouter from './routes/address.route.js'
 import uploadRouter from './routes/upload.route.js';
 import subCategoryRouter from './routes/subCategory.route.js';
@@ -77,6 +78,7 @@ app.use('/api/subcategory',subCategoryRouter)
 app.use('/api/product',productRouter)
 app.use('/api/cart',cartRouter)
 app.use('/api/address',addressRouter)
+app.use('/api/order',OrderRouter);
 connectDB().then(() => {
        app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);})
