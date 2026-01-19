@@ -1,5 +1,6 @@
 
 // Use relative URLs for production (same domain), localhost for development
+// Fixed for Vercel deployment compatibility
 export const baseURL = (import.meta.env?.DEV ?? false) ? (import.meta.env?.VITE_API_URL ?? '') : '';
 const SummaryApi = {
     register: {
