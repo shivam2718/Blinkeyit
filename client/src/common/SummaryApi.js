@@ -1,5 +1,6 @@
 
-export const baseURL = import.meta.env.VITE_API_URL;
+// Use relative URLs for production (same domain), localhost for development
+export const baseURL = import.meta.env.DEV ? import.meta.env.VITE_API_URL : '';
 const SummaryApi = {
     register: {
         url: '/api/user/register',

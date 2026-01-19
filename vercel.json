@@ -3,5 +3,8 @@
     "api/index.js": {
       "includeFiles": "server/**"
     }
-  }
+  },
+  "buildCommand": "cd client && npm run build",
+  "outputDirectory": "client/dist",
+  "installCommand": "npm install && cd client && npm install"
 }
