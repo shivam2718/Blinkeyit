@@ -1,13 +1,24 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root {
+  --primary-color: #10b981; /* Emerald */
+  --secondary-color: #059669;
+  --accent-color: #f59e0b;
+  --background-gradient: linear-gradient(135deg, #f3f9f5 0%, #e8f5e9 100%);
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
 body {
-  background-color: #f3f9f5;  
+  background: var(--background-gradient);
   font-family: "Poppins", sans-serif;
-  font-weight: 100;
+  font-weight: 400;
   font-style: normal;
   color: #374151;
+  min-height: 100vh;
 }
+
 .scrollbar-none::-webkit-scrollbar{
   display: none;
 }
@@ -17,10 +28,28 @@ body {
 }
 
 .scrollbarCustom::-webkit-scrollbar-thumb {
-  background-color: #cdf1ce; /* Primary green thumb */
+  background-color: var(--primary-color); /* Primary green thumb */
   border-radius: 3px;
 }
 
 .scrollbarCustom::-webkit-scrollbar-thumb:hover {
-  background-color: #448a48; /* Darker green on hover */
+  background-color: var(--secondary-color); /* Darker green on hover */
+}
+
+/* Modern button styles */
+.btn-primary {
+  @apply bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200;
+}
+
+.btn-secondary {
+  @apply bg-white text-emerald-600 font-semibold py-2 px-4 rounded-lg border border-emerald-300 shadow-md hover:shadow-lg hover:bg-emerald-50 transition-all duration-200;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100;
+}
+
+.card-hover {
+  @apply hover:transform hover:scale-105 transition-transform duration-200;
 }

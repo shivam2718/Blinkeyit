@@ -61,25 +61,24 @@ const Header = () => {
 }, [cartItem]);
 
   return (
-    <header className="h-24
-     lg:h-20 lg:shadow-md sticky top-0 z-40 flex flex-col justify-center gap-1 bg-white  px-2">
+    <header className="h-24 lg:h-20 bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-40 flex flex-col justify-center gap-1 border-b border-gray-200/50">
       {!(isSearchPage && isMobile) && (
         <div className="container mx-auto flex items-center justify-between px-2">
           {/*logo*/}
-          <Link to="/" className="h-full flex justify-center items-center">
+          <Link to="/" className="h-full flex justify-center items-center hover:scale-105 transition-transform duration-200">
             <img
               src={logo}
               alt="Logo"
               width={170}
               height={60}
-              className="hidden lg:block"
+              className="hidden lg:block drop-shadow-sm"
             />
             <img
               src={logo}
               alt="Logo"
               width={120}
               height={60}
-              className="lg:hidden"
+              className="lg:hidden drop-shadow-sm"
             />
           </Link>
 
@@ -91,7 +90,7 @@ const Header = () => {
           {/*login and my cart */}
           <div>
             {/*user icon is only displayed in mobile version */}
-            <button className=" lg:hidden" >
+            <button className="lg:hidden p-2 rounded-full hover:bg-gray-100 transition-colors duration-200">
               <FaRegCircleUser size={26} />
             </button>
 
@@ -101,7 +100,7 @@ const Header = () => {
               {user?._id ? (
                 <div className="relative">
                   <div
-                    className="flex items-center gap-1 cursor-pointer select-none "
+                    className="flex items-center gap-1 cursor-pointer select-none hover:text-emerald-600 transition-colors duration-200"
                     onClick={() => setOpenUserMenu(true)}
                   >
                     <p>Account</p>
@@ -113,24 +112,24 @@ const Header = () => {
                   </div>
                   {openUserMenu && (
                     <div className="absolute right-0 h-20 top-12">
-                      <div className="bg-white lg:shadow-lg rounded p-4 min-w-52">
+                      <div className="bg-white/95 backdrop-blur-md lg:shadow-xl rounded-xl p-4 min-w-52 border border-gray-200/50">
                         <UsersMenu close={handleCloseUserMenu} />
                       </div>
                     </div>
                   )}
                 </div>
               ) : (
-                <button onClick={redirectToLoginPage} className="text-lg  px-2">
+                <button onClick={redirectToLoginPage} className="text-lg px-4 py-2 rounded-lg hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200 font-medium">
                   Login
                 </button>
               )}
 
-              <button className="flex items-center gap-2  bg-green-800 hover:bg-green-700 px-3 py-3 rounded text-white"
+              <button className="flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-4 py-3 rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
                onClick={()=>setOpenCartSection((prev)=>!prev)}
               >
                 {/* add to cart icon */}
                 <div className="animate-bounce">
-                  <GiShoppingCart size={36} />
+                  <GiShoppingCart size={28} />
                 </div>
                 <div className="font-semibold">
                   {

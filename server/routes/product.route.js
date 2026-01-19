@@ -1,7 +1,7 @@
 import {Router} from 'express'
 import {createProductController,getProductController,getProductByCategory,getProductByCategoryAndSubCategory,getProductDetails,updateProductDetails,deleteProductDetails,searchProduct} from '../controllers/product.controller.js'
 import auth from '../middleware/auth.js'
-import admin from '../middleware/Admin.js'
+import admin from '../middleware/admin.js'
 const productRouter =Router()
 productRouter.post("/create",auth,admin,createProductController)
 productRouter.post("/get",getProductController)

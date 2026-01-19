@@ -12,7 +12,9 @@ async function connectDB() {
         console.log("MongoDB connected successfully");
     } catch (error) {
         console.log("MongoDB connection failed:", error);
-        process.exit(1); // Exit the process with failure
+        // In serverless environments, don't exit the process
+        // Instead, throw the error to be handled by the caller
+        throw error;
     }
 }
 export default connectDB;

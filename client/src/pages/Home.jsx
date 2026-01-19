@@ -25,41 +25,42 @@ navigate(url)
 }
 
   return (
-    <section className=" bg-white">
-      <div className='min-h-48  container mx-auto  my-4   '>
-        <div className={`w-full h-full bg-white min-h-48 rounded  ${!banner&&"animate-pulse my-2"} `}>
+    <section className="bg-gradient-to-br from-white via-emerald-50 to-green-50 min-h-screen">
+      <div className='min-h-48 container mx-auto my-6'>
+        <div className={`w-full h-full bg-gradient-to-r from-emerald-100 to-green-100 min-h-48 rounded-2xl shadow-xl overflow-hidden ${!banner&&"animate-pulse my-2"} `}>
           <img 
           src={banner}
           alt="Banner" 
-          className='w-full h-full object-cover rounded hidden lg:block'
+          className='w-full h-full object-cover rounded-2xl hidden lg:block hover:scale-105 transition-transform duration-500'
            />
             <img 
           src={bannerMobile}
           alt="Banner" 
-          className='w-full h-full object-cover rounded  lg:hidden'
+          className='w-full h-full object-cover rounded-2xl lg:hidden hover:scale-105 transition-transform duration-500'
            />
         </div>
       </div>
-      <div className='container mx-auto my-2 px-4  grid grid-cols-4 md:grid-cols-8
-      lg:grid-cols-10  gap-2'>
+      <div className='container mx-auto my-8 px-4 grid grid-cols-4 md:grid-cols-8 lg:grid-cols-10 gap-4'>
    {
     loadingCategory?(new Array(12).fill(null).map((c,index)=>{
       return (
-        <div key={index+"loadingcategory"} className="bg-white rounded  min-h-36 grid  gap-2 p-4 shadow-sm animate-pulse">
-          <div className="bg-blue-100 rounded  min-h-28"></div>
-          <div className="bg-blue-100 rounded h-14"></div>
+        <div key={index+"loadingcategory"} className="bg-white rounded-2xl min-h-36 grid gap-2 p-4 shadow-lg animate-pulse border border-gray-100">
+          <div className="bg-gradient-to-r from-emerald-100 to-green-100 rounded-xl min-h-28"></div>
+          <div className="bg-gradient-to-r from-emerald-100 to-green-100 rounded-lg h-14"></div>
         </div>
       );
     })):(
      categoryData.map((cat,index)=>{
       return (
-        <div onClick={()=>handleRedirectProductListPage(cat._id,cat.name)} key={cat._id+"displaycategory"} className="bg-white rounded  min-h-36 grid  gap-2 p-4 shadow-sm cursor-pointer">
+        <div onClick={()=>handleRedirectProductListPage(cat._id,cat.name)} key={cat._id+"displaycategory"} className="bg-white rounded-2xl min-h-36 grid gap-2 p-4 shadow-lg cursor-pointer hover:shadow-2xl hover:scale-105 transition-all duration-300 border border-gray-100 group">
           <img
           src={cat.image}
           alt={cat.name}
-          className="w-full h-full object-cover rounded"
+          className="w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-300"
           />
-
+          <div className="text-center">
+            <p className="text-sm font-semibold text-gray-700 group-hover:text-emerald-600 transition-colors duration-200">{cat.name}</p>
+          </div>
         </div>
       )
      })

@@ -79,8 +79,30 @@ app.use('/api/product',productRouter)
 app.use('/api/cart',cartRouter)
 app.use('/api/address',addressRouter)
 app.use('/api/order',OrderRouter);
-connectDB().then(() => {
-       app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);})
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Something went wrong!', error: err.message });
 });
+
+// Connect to database
+try {
+    await connectDB();
+    console.log("Database connected successfully");
+} catch (error) {
+    console.error("Database connection failed:", error);
+    // In serverless, we can't exit, but we can log the error
+    // The app will still try to run, but database operations will fail
+}
+
+// Export the app for Vercel
+export default app;
+
+// For local development (this won't run on Vercel)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+}
 
