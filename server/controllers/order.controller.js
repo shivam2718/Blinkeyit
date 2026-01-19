@@ -2,7 +2,8 @@
 import OrderModel from '../models/order.model.js';
 import UserModel from '../models/user.model.js';
 import mongoose from 'mongoose';
-import CartProductModel from '../models/cartProduct.model.js';
+import CartProduct from "../models/cartproduct.model.js";
+
  export async function CashOnDeliveryOrderController(request,response){
     try {
         const userId = request.userId // auth middleware 
