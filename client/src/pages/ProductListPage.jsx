@@ -1,10 +1,10 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react';
-import Axios from '../utils/Axios'
+import Axios from '../utils/axios'
 import SummaryApi from '../common/SummaryApi'
 import {Link} from "react-router-dom"
-import AxiosToastError from '../utils/AxiosToastError'
+import AxiosToastError from '../utils/axiosToastError'
 import { useEffect } from 'react'
 import Loading from '../components/Loading'
 import CardProduct from '../components/CardProduct'

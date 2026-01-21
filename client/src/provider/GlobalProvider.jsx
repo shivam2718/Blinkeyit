@@ -1,10 +1,10 @@
 
 import { createContext,useContext, useEffect, useState } from "react";
-import Axios from "../utils/Axios.js";
+import Axios from '../utils/axios';
 import SummaryApi from "../common/SummaryApi";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAddItemCart } from "../store/cartProduct";
-import AxiosToastError from "../utils/AxiosToastError";
+import AxiosToastError from "../utils/axiosToastError";
 import toast from "react-hot-toast";
 import { pricewithDiscount } from '../utils/priceWithDiscount.js'
 

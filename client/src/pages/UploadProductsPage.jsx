@@ -9,8 +9,8 @@ import uploadImage from '../utils/uploadImage';
 import Loading from '../components/Loading';
 import ViewImage from '../components/ViewImage'
 import SummaryApi from '../common/SummaryApi';
-import Axios from '../utils/Axios.js';
-import AxiosToastError from '../utils/AxiosToastError.js'
+import Axios from '../utils/axios';
+import AxiosToastError from '../utils/axiosToastError'
 import successAlert from '../utils/SuccessAlert.js';
 const UploadProducts = () => {
   const [data,setData]=useState({

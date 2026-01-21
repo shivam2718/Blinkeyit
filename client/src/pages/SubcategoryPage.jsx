@@ -6,8 +6,8 @@ import { MdDelete } from "react-icons/md";
 import ConfirmBox from '../components/confirmBox';
 import { useState } from 'react'
 import UploadSubCategoryModel from '../components/UploadSubCategoryModel'
-import AxiosToastError from '../utils/AxiosToastError'
-import Axios from '../utils/Axios'
+import AxiosToastError from '../utils/axiosToastError'
+import Axios from '../utils/axios'
 import SummaryApi from '../common/SummaryApi'
 import { useEffect } from 'react'
 import DisplayTable from '../components/DisplayTable'

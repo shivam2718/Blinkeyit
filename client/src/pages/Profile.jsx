@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlinePermIdentity } from "react-icons/md";
 import { setUserDetails } from '../store/userSlice';
 import UserProfileAvatarEdit from "../components/UserProfileAvatarEdit";
-import Axios from '../utils/Axios';
+import Axios from '../utils/axios';
 import SummaryApi from '../common/SummaryApi';
-import AxiosToastError from '../utils/AxiosToastError';
+import AxiosToastError from '../utils/axiosToastError';
 import toast from 'react-hot-toast';
 import fetchUserDetails from '../utils/fetchUserDetails';
 

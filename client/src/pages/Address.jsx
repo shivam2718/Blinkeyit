@@ -4,8 +4,8 @@ import AddAddress from '../components/AddAddress'
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { toast } from 'react-hot-toast';
-import AxiosToastError from '../utils/AxiosToastError'
-import Axios from '../utils/Axios';
+import AxiosToastError from '../utils/axiosToastError'
+import Axios from '../utils/axios';
 import SummaryApi from '../common/SummaryApi'
 import EditAddress from '../pages/EditAddress'
 import {useGlobalContext} from '../provider/GlobalProvider'

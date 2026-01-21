@@ -1,9 +1,9 @@
 import {useParams} from 'react-router-dom'
 import SummaryApi from '../common/SummaryApi'
-import AxiosToastError from '../utils/AxiosToastError'
+import AxiosToastError from '../utils/axiosToastError'
 import { useEffect, useState, useRef} from 'react'
 import { PiCurrencyInrBold } from "react-icons/pi";
-import Axios from '../utils/Axios.js'
+import Axios from '../utils/axios'
 import Divider from '../components/Divider'
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
