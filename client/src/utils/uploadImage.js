@@ -1,4 +1,4 @@
-import Axios from './Axios'
+import Axios from './axios'
 import SummaryApi from '../common/SummaryApi'
 const uploadImage=async(image)=>{
     try {
