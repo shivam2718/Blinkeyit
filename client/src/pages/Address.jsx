@@ -54,7 +54,7 @@ const Address = () => {
 
    
    <div key={index } 
-   className={` p-4 mb-2 rounded flex flex-center gap-4 hover:border-1 hover:border-purple-400 hover:text-purple-600 bg-white mt-4 border-t-1 border-l-1  ${!address.status && 'hidden'}`}>
+   className={` p-4 mb-2 rounded flex flex-center gap-4 hover:border-1 hover:border-purple-400 hover:text-purple-600 bg-white mt-4 border-t border-l  ${!address.status && 'hidden'}`}>
     
       
       <div className='w-full'>

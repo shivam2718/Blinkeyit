@@ -9,7 +9,7 @@ import uploadImage from '../utils/uploadImage';
 import Loading from '../components/Loading';
 import ViewImage from '../components/ViewImage'
 import SummaryApi from '../common/SummaryApi';
-import Axios from '../utils/Axios';
+import Axios from '../utils/Axios.js';
 import AxiosToastError from '../utils/AxiosToastError.js'
 import successAlert from '../utils/SuccessAlert.js';
 const UploadProducts = () => {

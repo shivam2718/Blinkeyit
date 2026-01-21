@@ -1,6 +1,6 @@
 
 import { createContext,useContext, useEffect, useState } from "react";
-import Axios from "../utils/Axios";
+import Axios from "../utils/Axios.js";
 import SummaryApi from "../common/SummaryApi";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAddItemCart } from "../store/cartProduct";

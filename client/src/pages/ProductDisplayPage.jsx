@@ -75,7 +75,7 @@ console.log("product data", data)
     <img
   src={data.image[image]}
   className="w-auto h-auto max-h-full max-w-full object-contain
-  md:aspect-[6/3]
+  md:aspect-6/3
   "
   alt="product"
 />

@@ -5,7 +5,7 @@ import { valideURLConvert } from '../utils/valideURLConvert'
 import { pricewithDiscount } from '../utils/priceWithDiscount.js'
 import SummaryApi from '../common/SummaryApi'
 import AxiosToastError from '../utils/AxiosToastError'
-import Axios from '../utils/Axios'
+import Axios from '../utils/Axios.js'
 import toast from 'react-hot-toast'
 import { useState } from 'react'
 import { useGlobalContext } from '../provider/GlobalProvider'
@@ -24,7 +24,7 @@ const CardProduct = ({data}) => {
             />
       </div>
       <div className='flex items-center gap-1'>
-        <div className='rounded text-xs w-fit p-[1px] px-2 text-green-600 bg-green-50'>
+        <div className='rounded text-xs w-fit p-px px-2 text-green-600 bg-green-50'>
               10 min 
         </div>
         <div>

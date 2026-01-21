@@ -133,7 +133,7 @@ const Profile = () => {
 
         <button
           type="submit"
-          className="text-md font-bold w-full px-3 py-2 rounded-md mt-5 border-yellow-200 border-[2px] bg-green-100 hover:bg-amber-200"
+          className="text-md font-bold w-full px-3 py-2 rounded-md mt-5 border-yellow-200 border-2 bg-green-100 hover:bg-amber-200"
         >
           {loading ? "Loading..." : "Submit"}
         </button>

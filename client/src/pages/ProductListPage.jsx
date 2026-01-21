@@ -74,9 +74,9 @@ useEffect(()=>{
      <div
   className="
     grid  
-    [grid-template-columns:90px_1fr]
-    md:[grid-template-columns:200px_2fr]
-    lg:[grid-template-columns:280px_3fr]
+    grid-cols-[90px_1fr]
+    md:grid-cols-[200px_2fr]
+    lg:grid-cols-[280px_3fr]
   "
 >
 
