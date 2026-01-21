@@ -49,8 +49,11 @@ credentials: true — This allows the server to accept requests that include cre
 origin: process.env.FRONTEND_URL — This restricts which origins are allowed to access the server. Only requests coming from the URL specified in the FRONTEND_URL environment variable will be permitted. This helps prevent unauthorized domains from making requests to your backend
 */
 app.use(cors({
-  credentials: true,
-  origin: process.env.FRONTEND_URL||"http://localhost:5173"
+  origin: [
+    "http://localhost:5173", // vite dev
+    "http://localhost:4173"  // vite preview
+  ],
+  credentials: true
 }));
 //this is left
 app.use(cookieParser());
