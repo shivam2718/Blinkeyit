@@ -1,7 +1,7 @@
 
 import { useForm } from "react-hook-form"
 import { IoClose } from "react-icons/io5";
-import Axios from '../utils/Axios'
+import Axios from '../utils/axios'
 import toast from 'react-hot-toast'
 import SummaryApi from '../common/SummaryApi'
 import  AxiosToastError  from '../utils/AxiosToastError';

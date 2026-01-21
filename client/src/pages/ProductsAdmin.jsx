@@ -4,7 +4,7 @@ import EditProductAdmin from "../components/EditProductAdmin";
 import SummaryApi from "../common/SummaryApi";
 import ProductCardAdmin from "../components/ProductCardAdmin";
 import { useState } from "react";
-import Axios from "../utils/Axios";
+import Axios from "../utils/axios";
 import { useEffect } from "react";
 import AxiosToastError from "../utils/AxiosToastError";  
 import Loading from "../components/Loading";
